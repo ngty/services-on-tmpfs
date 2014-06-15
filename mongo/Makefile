@@ -8,7 +8,7 @@ start: setup
 	mongod -f $(CONFIG)
 
 stop:
-	kill $(shell cat $(shell cat $(CONFIG) | grep pidfilepath | awk '{print $$3}'))
+	- kill $(shell cat $(shell cat $(CONFIG) | grep pidfilepath | awk '{print $$3}'))
 
 cli:
 	mongo --host $(SCRATCH)/run/$(shell ls $(SCRATCH)/run | grep sock) $(MONGO_DB)

@@ -8,7 +8,7 @@ start: setup
 	redis-server $(CONFIG)
 
 stop:
-	kill $(shell cat $(shell cat $(CONFIG) | grep pidfil | awk '{print $$2}'))
+	- kill $(shell cat $(shell cat $(CONFIG) | grep pidfil | awk '{print $$2}'))
 
 cli:
 	redis-cli -s $(shell cat $(CONFIG) | grep unixsocket | head -n1 | awk '{print $$2}')

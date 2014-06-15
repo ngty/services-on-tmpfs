@@ -12,7 +12,7 @@ start: setup
 	- $(MAKE) setup/root
 
 stop: 
-	kill $(shell cat $(shell cat $(CONFIG) | grep pid-file | awk '{print $$3}'))
+	- kill $(shell cat $(shell cat $(CONFIG) | grep pid-file | awk '{print $$3}'))
 
 setup/root:
 	mysqladmin $(CLIENT_OPTS) -u root password $(PASSWD)
