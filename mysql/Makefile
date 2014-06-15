@@ -1,5 +1,5 @@
 ROOT = $(shell pwd)
-SCRATCH = /scratch/mysql
+SCRATCH = /scratch/mysqld
 CONFIG = $(ROOT)/my.cnf
 PASSWD ?= passed
 CLIENT_OPTS = --defaults-file=$(CONFIG)
