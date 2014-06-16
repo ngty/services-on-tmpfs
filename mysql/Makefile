@@ -1,5 +1,5 @@
 ROOT = $(shell pwd)
-SCRATCH = /scratch/mysqld
+SCRATCH = /scratch/mysql
 CONFIG = $(ROOT)/my.cnf
 CLIENT_OPTS = --defaults-file=$(CONFIG)
 SERVER_OPTS = --defaults-file=$(CONFIG) --user=`whoami` --basedir=/usr --datadir=$(SCRATCH)

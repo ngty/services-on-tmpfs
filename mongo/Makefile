@@ -1,5 +1,5 @@
 ROOT = $(shell pwd)
-SCRATCH = /scratch/mongod
+SCRATCH = /scratch/mongo
 CONFIG = $(ROOT)/mongod.conf
 
 all: start
