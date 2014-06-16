@@ -13,10 +13,10 @@ stop:
 	- kill $(shell cat $(shell cat $(CONFIG) | grep pid-file | awk '{print $$3}'))
 
 cli:
-	mysql -h $(shell hostname) -u root
+	mysql -h $(shell hostname) -u root $(DB_NAME)
 
 cli/%:
-	mysql -h $(shell hostname) -u root $(subst cli/,,$@)
+	DB_NAME=$(subst cli/,,$@) $(MAKE) cli
 	
 setup: $(CONFIG) $(SCRATCH) $(SCRATCH)/innodb $(SCRATCH)/run
 
