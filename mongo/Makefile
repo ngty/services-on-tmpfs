@@ -14,10 +14,10 @@ clean: stop
 	rm -rf $(SCRATCH)
 
 cli:
-	mongo --host $(SCRATCH)/run/$(shell ls $(SCRATCH)/run | grep sock) $(MONGO_DB)
+	mongo --host $(SCRATCH)/run/$(shell ls $(SCRATCH)/run | grep sock) $(DB_NAME)
 
 cli/%:
-	MONGO_DB=$(subst cli/,,$@) $(MAKE) cli
+	DB_NAME=$(subst cli/,,$@) $(MAKE) cli
 
 setup: $(CONFIG) $(SCRATCH)/run
 
