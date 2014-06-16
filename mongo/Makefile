@@ -10,6 +10,9 @@ start: setup
 stop:
 	- kill $(shell cat $(shell cat $(CONFIG) | grep pidfilepath | awk '{print $$3}'))
 
+clean: stop
+	rm -rf $(SCRATCH)
+
 cli:
 	mongo --host $(SCRATCH)/run/$(shell ls $(SCRATCH)/run | grep sock) $(MONGO_DB)
 

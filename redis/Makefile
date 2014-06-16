@@ -10,6 +10,9 @@ start: setup
 stop:
 	- kill $(shell cat $(shell cat $(CONFIG) | grep pidfil | awk '{print $$2}'))
 
+clean: stop
+	rm -rf $(SCRATCH)
+
 cli:
 	redis-cli -s $(shell cat $(CONFIG) | grep unixsocket | head -n1 | awk '{print $$2}')
 

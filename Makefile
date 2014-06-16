@@ -4,6 +4,8 @@ start: mysql/start mongo/start redis/start
 
 stop: mysql/stop mongo/stop redis/stop
 
+clean: mysql/clean mongo/clean redis/clean
+
 
 mysql/%:
 	$(MAKE) -C mysql $(subst mysql/,,$@)

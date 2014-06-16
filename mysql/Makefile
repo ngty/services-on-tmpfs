@@ -12,6 +12,9 @@ start: setup
 stop: 
 	- kill $(shell cat $(shell cat $(CONFIG) | grep pid-file | awk '{print $$3}'))
 
+clean: stop
+	rm -rf $(SCRATCH)
+
 cli:
 	mysql -h $(shell hostname) -u root $(DB_NAME)
 
