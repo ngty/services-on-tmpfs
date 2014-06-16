@@ -1,6 +1,6 @@
-ROOT = $(shell pwd)
+PWD = $(shell pwd)
 SCRATCH = /scratch/redis
-CONFIG = $(ROOT)/redis.conf
+CONFIG = $(PWD)/redis.conf
 
 all: start
 
