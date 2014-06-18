@@ -1,5 +1,5 @@
 PWD = $(shell pwd)
-SCRATCH = /scratch/mysql
+SCRATCH ?= /scratch/mysql
 CONFIG = $(PWD)/my.cnf
 CLIENT_OPTS = --defaults-file=$(CONFIG)
 SERVER_OPTS = --defaults-file=$(CONFIG) --user=`whoami` --basedir=/usr --datadir=$(SCRATCH)

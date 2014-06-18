@@ -1,5 +1,5 @@
 PWD = $(shell pwd)
-SCRATCH = /scratch/mongo
+SCRATCH ?= /scratch/mongo
 CONFIG = $(PWD)/mongod.conf
 
 all: start

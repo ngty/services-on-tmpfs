@@ -1,5 +1,5 @@
 PWD = $(shell pwd)
-SCRATCH = /scratch/redis
+SCRATCH ?= /scratch/redis
 CONFIG = $(PWD)/redis.conf
 
 all: start
