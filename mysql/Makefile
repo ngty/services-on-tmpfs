@@ -15,6 +15,10 @@ stop:
 clean: stop
 	rm -rf $(SCRATCH)
 
+import/%:
+	[ -f "$(DUMP)" ] && \
+		mysql -u root $(subst import/,,$@) < $(DUMP)
+
 cli:
 	mysql -h $(shell hostname) -u root $(DB_NAME)
 
