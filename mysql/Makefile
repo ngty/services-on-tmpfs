@@ -26,9 +26,9 @@ cli:
 cli/%:
 	DB_NAME=$(subst cli/,,$@) $(MAKE) cli
 	
-setup: $(CONFIG) $(SCRATCH) $(SCRATCH)/innodb $(SCRATCH)/run
+setup: $(CONFIG) $(SCRATCH)
 
-$(SCRATCH):
+$(SCRATCH): $(SCRATCH)/innodb $(SCRATCH)/run
 	mysql_install_db $(SERVER_OPTS)
 
 $(SCRATCH)/%:
