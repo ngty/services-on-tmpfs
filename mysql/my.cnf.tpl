@@ -19,14 +19,14 @@
 # The following options will be passed to all MariaDB clients
 [client]
 #password	= your_password
-port		= 3306
+port		= @@PORT@@
 socket		= @@SCRATCH@@/run/mysqld.sock
 
 # Here follows entries for some specific programs
 
 # The MariaDB server
 [mysqld]
-port		= 3306
+port		= @@PORT@@
 socket		= @@SCRATCH@@/run/mysqld.sock
 skip-external-locking
 key_buffer_size = 16M
@@ -77,11 +77,11 @@ server-id	= 1
 #    MASTER_USER=<user>, MASTER_PASSWORD=<password> ;
 #
 #    where you replace <host>, <user>, <password> by quoted strings and
-#    <port> by the master's port number (3306 by default).
+#    <port> by the master's port number (@@PORT@@ by default).
 #
 #    Example:
 #
-#    CHANGE MASTER TO MASTER_HOST='125.564.12.1', MASTER_PORT=3306,
+#    CHANGE MASTER TO MASTER_HOST='125.564.12.1', MASTER_PORT=@@PORT@@,
 #    MASTER_USER='joe', MASTER_PASSWORD='secret';
 #
 # OR
@@ -114,7 +114,7 @@ server-id	= 1
 #master-password =   <password>
 #
 # The port the master is listening on.
-# optional - defaults to 3306
+# optional - defaults to @@PORT@@
 #master-port     =  <port>
 #
 # binary logging - not required for slaves, but recommended
