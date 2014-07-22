@@ -3,7 +3,7 @@ SCRATCH ?= /scratch
 MYSQL_SCRATCH ?= $(SCRATCH)/mysql
 PORT ?= 3406
 MYSQL_PORT ?= $(PORT)
-CONFIG = $(PWD)/my.cnf
+CONFIG = $(PWD)/my.cnf.$(MYSQL_PORT)
 CLIENT_OPTS = --defaults-file=$(CONFIG)
 SERVER_OPTS = --defaults-file=$(CONFIG) --user=`whoami` --basedir=/usr --datadir=$(MYSQL_SCRATCH)
 

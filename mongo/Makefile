@@ -3,7 +3,7 @@ SCRATCH ?= /scratch
 MONGO_SCRATCH ?= $(SCRATCH)/mongo
 PORT ?= 28017
 MONGO_PORT ?= $(PORT)
-CONFIG = $(PWD)/mongod.conf
+CONFIG = $(PWD)/mongod.conf.$(MONGO_PORT)
 
 all: start
 

@@ -3,7 +3,7 @@ SCRATCH ?= /scratch
 REDIS_SCRATCH ?= $(SCRATCH)/redis
 PORT ?= 6479
 REDIS_PORT ?= $(PORT)
-CONFIG = $(PWD)/redis.conf
+CONFIG = $(PWD)/redis.conf.$(REDIS_PORT)
 
 all: start
 
