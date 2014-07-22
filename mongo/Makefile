@@ -1,6 +1,8 @@
 PWD = $(shell pwd)
 SCRATCH ?= /scratch
 MONGO_SCRATCH ?= $(SCRATCH)/mongo
+PORT ?= 28017
+MONGO_PORT ?= $(PORT)
 CONFIG = $(PWD)/mongod.conf
 
 all: start
@@ -23,7 +25,9 @@ cli/%:
 setup: $(CONFIG) $(MONGO_SCRATCH)/run
 
 $(CONFIG):
-	cat $(@).tpl | sed "s|@@SCRATCH@@|$(MONGO_SCRATCH)|g" > $@
+	cat $(@).tpl | \
+		sed "s|@@PORT@@|$(MONGO_PORT)|g" | \
+		sed "s|@@SCRATCH@@|$(MONGO_SCRATCH)|g" > $@
 
 $(MONGO_SCRATCH)/%:
 	mkdir -p $@

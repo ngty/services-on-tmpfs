@@ -2,6 +2,7 @@
 # Run mongod --help to see a list of options
 
 bind_ip = 127.0.0.1
+port = @@PORT@@
 quiet = true
 dbpath = @@SCRATCH@@
 logpath = @@SCRATCH@@/run/mongod.log
