@@ -3,6 +3,7 @@ SCRATCH ?= /scratch
 MONGO_SCRATCH ?= $(SCRATCH)/mongo
 PORT ?= 28017
 MONGO_PORT ?= $(PORT)
+CONFIG_TPL = $(PWD)/mongod.conf.tpl
 CONFIG = $(PWD)/mongod.conf.$(MONGO_PORT)
 
 all: start
@@ -25,7 +26,7 @@ cli/%:
 setup: $(CONFIG) $(MONGO_SCRATCH)/run
 
 $(CONFIG):
-	cat $(@).tpl | \
+	cat $(CONFIG_TPL) | \
 		sed "s|@@PORT@@|$(MONGO_PORT)|g" | \
 		sed "s|@@SCRATCH@@|$(MONGO_SCRATCH)|g" > $@
 

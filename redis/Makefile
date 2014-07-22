@@ -3,6 +3,7 @@ SCRATCH ?= /scratch
 REDIS_SCRATCH ?= $(SCRATCH)/redis
 PORT ?= 6479
 REDIS_PORT ?= $(PORT)
+CONFIG_TPL = $(PWD)/redis.conf.tpl
 CONFIG = $(PWD)/redis.conf.$(REDIS_PORT)
 
 all: start
@@ -22,7 +23,7 @@ cli:
 setup: $(CONFIG) $(REDIS_SCRATCH)/run
 
 $(CONFIG):
-	cat $(@).tpl | \
+	cat $(CONFIG_TPL) | \
 		sed "s|@@PORT@@|$(REDIS_PORT)|g" | \
 		sed "s|@@SCRATCH@@|$(REDIS_SCRATCH)|g" > $@
 

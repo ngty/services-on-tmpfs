@@ -3,6 +3,7 @@ SCRATCH ?= /scratch
 MYSQL_SCRATCH ?= $(SCRATCH)/mysql
 PORT ?= 3406
 MYSQL_PORT ?= $(PORT)
+CONFIG_TPL = $(PWD)/my.cnf.tpl
 CONFIG = $(PWD)/my.cnf.$(MYSQL_PORT)
 CLIENT_OPTS = --defaults-file=$(CONFIG)
 SERVER_OPTS = --defaults-file=$(CONFIG) --user=`whoami` --basedir=/usr --datadir=$(MYSQL_SCRATCH)
@@ -37,7 +38,7 @@ $(MYSQL_SCRATCH)/%:
 	mkdir -p $@
 
 $(CONFIG):
-	cat $(@).tpl | sed "s|@@PORT@@|$(MYSQL_PORT)|g" | \
+	cat $(CONFIG_TPL) | sed "s|@@PORT@@|$(MYSQL_PORT)|g" | \
 		sed "s|@@SCRATCH@@|$(MYSQL_SCRATCH)|g" > $@
 
 .PHONY: $(CONFIG)
