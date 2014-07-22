@@ -42,7 +42,7 @@ pidfile @@SCRATCH@@/run/redis.pid
 
 # Accept connections on the specified port, default is 6379.
 # If port 0 is specified Redis will not listen on a TCP socket.
-port 6379
+port @@PORT@@
 
 # TCP listen() backlog.
 #
