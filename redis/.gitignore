@@ -1,1 +1,1 @@
-redis.conf
+redis.conf.[0-9]*
