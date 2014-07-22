@@ -1,6 +1,6 @@
 PWD = $(shell pwd)
 SCRATCH ?= /scratch
-SCRATCH_REDIS ?= $(SCRATCH)/redis
+REDIS_SCRATCH ?= $(SCRATCH)/redis
 CONFIG = $(PWD)/redis.conf
 
 all: start
@@ -12,17 +12,17 @@ stop:
 	- kill $(shell cat $(shell cat $(CONFIG) | grep pidfil | awk '{print $$2}'))
 
 clean: stop
-	rm -rf $(SCRATCH_REDIS)
+	rm -rf $(REDIS_SCRATCH)
 
 cli:
 	redis-cli -s $(shell cat $(CONFIG) | grep unixsocket | head -n1 | awk '{print $$2}')
 
-setup: $(CONFIG) $(SCRATCH_REDIS)/run
+setup: $(CONFIG) $(REDIS_SCRATCH)/run
 
 $(CONFIG):
-	cat $(@).tpl | sed "s|@@SCRATCH@@|$(SCRATCH_REDIS)|g" > $@
+	cat $(@).tpl | sed "s|@@SCRATCH@@|$(REDIS_SCRATCH)|g" > $@
 
-$(SCRATCH_REDIS)/%:
+$(REDIS_SCRATCH)/%:
 	mkdir -p $@
 
 .PHONY: $(CONFIG)

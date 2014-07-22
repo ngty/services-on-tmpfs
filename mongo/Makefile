@@ -1,6 +1,6 @@
 PWD = $(shell pwd)
 SCRATCH ?= /scratch
-SCRATCH_MONGO ?= $(SCRATCH)/mongo
+MONGO_SCRATCH ?= $(SCRATCH)/mongo
 CONFIG = $(PWD)/mongod.conf
 
 all: start
@@ -12,20 +12,20 @@ stop:
 	- kill $(shell cat $(shell cat $(CONFIG) | grep pidfilepath | awk '{print $$3}'))
 
 clean: stop
-	rm -rf $(SCRATCH_MONGO)
+	rm -rf $(MONGO_SCRATCH)
 
 cli:
-	mongo --host $(SCRATCH_MONGO)/run/$(shell ls $(SCRATCH_MONGO)/run | grep sock) $(DB_NAME)
+	mongo --host $(MONGO_SCRATCH)/run/$(shell ls $(MONGO_SCRATCH)/run | grep sock) $(DB_NAME)
 
 cli/%:
 	DB_NAME=$(subst cli/,,$@) $(MAKE) cli
 
-setup: $(CONFIG) $(SCRATCH_MONGO)/run
+setup: $(CONFIG) $(MONGO_SCRATCH)/run
 
 $(CONFIG):
-	cat $(@).tpl | sed "s|@@SCRATCH@@|$(SCRATCH_MONGO)|g" > $@
+	cat $(@).tpl | sed "s|@@SCRATCH@@|$(MONGO_SCRATCH)|g" > $@
 
-$(SCRATCH_MONGO)/%:
+$(MONGO_SCRATCH)/%:
 	mkdir -p $@
 
 .PHONY: $(CONFIG)

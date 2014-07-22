@@ -1,10 +1,10 @@
 PWD = $(shell pwd)
 SCRATCH ?= /scratch
-SCRATCH_MYSQL ?= $(SCRATCH)/mysql
+MYSQL_SCRATCH ?= $(SCRATCH)/mysql
 CONFIG = $(PWD)/my.cnf
 PORT ?= 3306
 CLIENT_OPTS = --defaults-file=$(CONFIG)
-SERVER_OPTS = --defaults-file=$(CONFIG) --user=`whoami` --basedir=/usr --datadir=$(SCRATCH_MYSQL)
+SERVER_OPTS = --defaults-file=$(CONFIG) --user=`whoami` --basedir=/usr --datadir=$(MYSQL_SCRATCH)
 
 all: start
 
@@ -15,7 +15,7 @@ stop:
 	- kill $(shell cat $(shell cat $(CONFIG) | grep pid-file | awk '{print $$3}'))
 
 clean: stop
-	rm -rf $(SCRATCH_MYSQL)
+	rm -rf $(MYSQL_SCRATCH)
 
 import/%:
 	[ -f "$(DUMP)" ] && \
@@ -27,16 +27,16 @@ cli:
 cli/%:
 	DB_NAME=$(subst cli/,,$@) $(MAKE) cli
 	
-setup: $(CONFIG) $(SCRATCH_MYSQL)
+setup: $(CONFIG) $(MYSQL_SCRATCH)
 
-$(SCRATCH_MYSQL): $(SCRATCH_MYSQL)/innodb $(SCRATCH_MYSQL)/run
+$(MYSQL_SCRATCH): $(MYSQL_SCRATCH)/innodb $(MYSQL_SCRATCH)/run
 	mysql_install_db $(SERVER_OPTS)
 
-$(SCRATCH_MYSQL)/%:
+$(MYSQL_SCRATCH)/%:
 	mkdir -p $@
 
 $(CONFIG):
 	cat $(@).tpl | sed "s|@@PORT@@|$(PORT)|g" | \
-		sed "s|@@SCRATCH@@|$(SCRATCH_MYSQL)|g" > $@
+		sed "s|@@SCRATCH@@|$(MYSQL_SCRATCH)|g" > $@
 
 .PHONY: $(CONFIG)
