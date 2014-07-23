@@ -24,7 +24,7 @@ import/%:
 		mysql -u root $(subst import/,,$@) < $(DUMP)
 
 cli:
-	mysql -h $(shell hostname) -u root $(DB_NAME)
+	mysql -S $(shell cat $(CONFIG) | grep socket | head -n1 | awk '{print $$3}') -u root $(DB_NAME)
 
 cli/%:
 	DB_NAME=$(subst cli/,,$@) $(MAKE) cli
