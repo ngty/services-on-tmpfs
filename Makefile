@@ -1,18 +1,22 @@
 all: start
 
-start: mysql/start mongo/start redis/start
+start: test/cmds mysql/start mongo/start redis/start
 
-stop: mysql/stop mongo/stop redis/stop
+stop: test/cmds mysql/stop mongo/stop redis/stop
 
-clean: mysql/clean mongo/clean redis/clean
+clean: test/cmds mysql/clean mongo/clean redis/clean
 
 
-mysql/%:
+mysql/%: test/cmds
 	$(MAKE) -C mysql $(subst mysql/,,$@)
 
-redis/%:
+redis/%: test/cmds
 	$(MAKE) -C redis $(subst redis/,,$@)
 
-mongo/%:
+mongo/%: test/cmds
 	$(MAKE) -C mongo $(subst mongo/,,$@)
+
+
+test/cmds:
+	./bin/nextport
 
