@@ -1,0 +1,16 @@
+#!/bin/bash
+PORT=$1
+
+if [ -z "$PORT" ]; then
+  if [ "$(type lsof 2>&1 | grep 'not found' | wc -l)" != "0" ]; then
+    echo "ERROR: cannot find command \`lsof'"
+    exit 1
+  fi
+else
+  while [ "$(lsof -iTCP:$PORT | grep LISTEN | wc -l)" != "0" ]; do
+    PORT=$((PORT+1))
+  done
+  echo $PORT
+fi
+
+exit 0
