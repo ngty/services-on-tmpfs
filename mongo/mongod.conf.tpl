@@ -9,4 +9,5 @@ logpath = @@SCRATCH@@/run/mongod.log
 pidfilepath = @@SCRATCH@@/run/mongod.pid
 logappend = true
 fork = true
+smallfiles = true
 unixSocketPrefix = @@SCRATCH@@/run
