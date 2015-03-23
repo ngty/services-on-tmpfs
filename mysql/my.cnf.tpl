@@ -126,13 +126,19 @@ innodb_data_file_path = ibdata1:10M:autoextend
 innodb_log_group_home_dir = @@SCRATCH@@/innodb
 # You can set .._buffer_pool_size up to 50 - 80 %
 # of RAM but beware of setting memory usage too high
-innodb_buffer_pool_size = 16M
+#innodb_buffer_pool_size = 16M
 innodb_additional_mem_pool_size = 2M
 # Set .._log_file_size to 25 % of buffer pool size
-innodb_log_file_size = 5M
+#innodb_log_file_size = 5M
 innodb_log_buffer_size = 8M
 innodb_flush_log_at_trx_commit = 1
 innodb_lock_wait_timeout = 50
+
+innodb_file_per_table
+innodb_flush_method=O_DIRECT
+innodb_log_file_size=1G
+innodb_buffer_pool_size=4G
+innodb_fast_shutdown=0
 
 [mysqldump]
 quick
