@@ -1,5 +1,5 @@
 PWD = $(shell pwd)
-SCRATCH ?= /scratch
+SCRATCH ?= ~/scratch
 PORT ?= 5532
 PGSQL_SCRATCH ?= $(SCRATCH)/pgsql
 PGSQL_PORT ?= $(PORT)
