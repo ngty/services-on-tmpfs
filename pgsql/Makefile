@@ -1,5 +1,5 @@
 PWD = $(shell pwd)
-SCRATCH ?= ~/scratch
+SCRATCH ?= $(shell cd ~ && pwd)/scratch
 PORT ?= 5532
 PGSQL_SCRATCH ?= $(SCRATCH)/pgsql
 PGSQL_PORT ?= $(PORT)
@@ -28,6 +28,12 @@ cli:
 
 cli/%:
 	DB_NAME=$(subst cli/,,$@) $(MAKE) cli
+
+create/%:
+	createdb $(PGSQL_CLIENT_OPTS) $(subst create/,,$@)
+	
+drop/%:
+	dropdb $(PGSQL_CLIENT_OPTS) $(subst drop/,,$@)
 	
 setup: $(PGSQL_SCRATCH) $(PGSQL_SCRATCH)/run $(PGSQL_SCRATCH)/postgresql.conf
 
